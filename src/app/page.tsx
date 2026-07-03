@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { getServiceSupabase } from '@/lib/supabase';
 import { getCurrentMonth } from '@/lib/utils';
 import RankingPageClient from './RankingPageClient';
 import type { Metadata } from 'next';
@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic';
 const month = getCurrentMonth();
 
 async function ensureMonthlyRanking() {
+  const supabase = getServiceSupabase();
   try {
     const { data: existing } = await supabase
       .from('monthly_rankings')
@@ -29,6 +30,7 @@ async function ensureMonthlyRanking() {
 }
 
 async function fetchRankingOnly() {
+  const supabase = getServiceSupabase();
   try {
     const [rankingRes, prizeRes, currentRes] = await Promise.all([
       supabase.rpc('get_public_ranking', { p_month: month }),

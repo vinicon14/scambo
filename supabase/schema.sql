@@ -80,6 +80,12 @@ ALTER TABLE hall_of_fame ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE payment_config ENABLE ROW LEVEL SECURITY;
 
+-- SECURITY DEFINER function to check admin (bypasses RLS, avoids infinite recursion)
+CREATE OR REPLACE FUNCTION is_admin()
+RETURNS BOOLEAN LANGUAGE sql SECURITY DEFINER STABLE AS $$
+  SELECT EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid());
+$$;
+
 -- Users policies
 CREATE POLICY "Users can insert themselves" ON users
   FOR INSERT WITH CHECK (true);
@@ -115,36 +121,24 @@ CREATE POLICY "Public can read active rankings" ON monthly_rankings
 CREATE POLICY "Public can read hall of fame" ON hall_of_fame
   FOR SELECT USING (true);
 
--- Admin policies
+-- Admin policies (use is_admin() to avoid recursive RLS)
 CREATE POLICY "Admin full access users" ON users
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 CREATE POLICY "Admin full access posts" ON posts
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 CREATE POLICY "Admin full access rankings" ON monthly_rankings
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 CREATE POLICY "Admin full access hall_of_fame" ON hall_of_fame
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 CREATE POLICY "Admin full access payment_config" ON payment_config
-  FOR ALL USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR ALL USING (is_admin());
 
 CREATE POLICY "Admin can read admin_users" ON admin_users
-  FOR SELECT USING (
-    EXISTS (SELECT 1 FROM admin_users WHERE id = auth.uid())
-  );
+  FOR SELECT USING (is_admin());
 
 -- 4. STORAGE BUCKET
 
