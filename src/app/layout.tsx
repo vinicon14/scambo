@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     apple: '/favicon.svg',
   },
   verification: {
-    google: 'google26c560e201fcf474.html',
+    google: 'b1lmBH_K68tLv38jBvK3Oz_xx3OiMBT4STiiZBL8gJI',
     other: {
-      'google-site-verification': 'google26c560e201fcf474.html',
+      'google-site-verification': 'b1lmBH_K68tLv38jBvK3Oz_xx3OiMBT4STiiZBL8gJI',
     },
   },
   openGraph: {
@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <meta name="google-site-verification" content="google26c560e201fcf474.html" />
+        <meta name="google-site-verification" content="b1lmBH_K68tLv38jBvK3Oz_xx3OiMBT4STiiZBL8gJI" />
         <meta name="theme-color" content="#7c3aed" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
