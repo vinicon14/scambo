@@ -114,12 +114,29 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
         onLoginSuccess(savedId, newUsername);
       }
 
-      setSuccess('Postagem criada com sucesso!');
+      setSuccess('Redirecionando para pagamento...');
 
-      setTimeout(() => {
+      // Create Mercado Pago payment
+      const paymentRes = await fetch('/api/create-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId: postResult.post.id }),
+      });
+
+      if (!paymentRes.ok) {
         router.push('/');
         router.refresh();
-      }, 2000);
+        return;
+      }
+
+      const { initPoint } = await paymentRes.json();
+
+      if (initPoint) {
+        window.location.href = initPoint;
+      } else {
+        router.push('/');
+        router.refresh();
+      }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Erro ao criar postagem');
     } finally {

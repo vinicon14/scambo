@@ -51,11 +51,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Referência da postagem não encontrada' }, { status: 400 });
     }
 
-    // Find post by external reference (payment_id)
+    // external_reference is the post UUID
     const { data: post } = await supabaseAdmin
       .from('posts')
       .select('id, amount, payment_status')
-      .eq('payment_id', externalReference)
+      .eq('id', externalReference)
       .single();
 
     if (!post) {
