@@ -54,6 +54,7 @@ export async function POST(request: Request) {
         },
         auto_return: 'approved',
         binary_mode: true,
+        notification_url: `${origin}/api/webhook/mercadopago`,
       }),
     });
 

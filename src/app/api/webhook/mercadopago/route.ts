@@ -3,9 +3,24 @@ import { getServiceSupabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    // Handle both JSON webhook and form-encoded IPN
+    const contentType = request.headers.get('content-type') || '';
+    let paymentId: string | null = null;
 
-    const paymentId = body.data?.id || body.id;
+    if (contentType.includes('application/json')) {
+      const body = await request.json();
+      paymentId = body.data?.id || body.id || null;
+    } else {
+      const formData = await request.formData();
+      paymentId = (formData.get('id') as string) || null;
+      // IPN sends topic + id in URL params
+      const url = new URL(request.url);
+      paymentId = paymentId || url.searchParams.get('id');
+    }
+
+    if (!paymentId) {
+      return NextResponse.json({ error: 'ID do pagamento não fornecido' }, { status: 400 });
+    }
 
     if (!paymentId) {
       return NextResponse.json({ error: 'ID do pagamento não fornecido' }, { status: 400 });
