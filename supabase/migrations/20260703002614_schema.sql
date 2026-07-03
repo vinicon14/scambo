@@ -328,7 +328,7 @@ $$ LANGUAGE plpgsql;
 -- Password: admin123 (bcrypt hash)
 -- IMPORTANT: Change this after first login!
 INSERT INTO admin_users (username, password_hash)
-VALUES ('admin', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy')
+VALUES ('admin', '$2b$10$otlcL0RyFVW2kpHP5hkWvuzUT1tKY7wI92a8lx1u8SX1ILaEdJXre')
 ON CONFLICT (username) DO NOTHING;
 
 -- Seed current month ranking
