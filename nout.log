@@ -116,3 +116,5 @@
  GET / 200 in 971ms (next.js: 119ms, application-code: 851ms)
  GET /health 404 in 237ms (next.js: 121ms, application-code: 115ms)
  GET / 200 in 848ms (next.js: 6ms, application-code: 842ms)
+ GET /health 404 in 68ms (next.js: 12ms, application-code: 55ms)
+ GET /health 404 in 58ms (next.js: 10ms, application-code: 48ms)
