@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Script from 'next/script';
+import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -92,20 +93,23 @@ export default function RootLayout({
             gtag('config', 'G-XXXXXXXXXX');
           `}
         </Script>
-        <Script id="structured-data" type="application/ld+json" strategy="beforeInteractive">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            name: 'Scambo',
-            url: 'https://www.scambo.shop',
-            description: 'Ranking mensal de fotos com prêmio em dinheiro via Pix.',
-            potentialAction: {
-              '@type': 'SearchAction',
-              target: 'https://www.scambo.shop/?q={search_term_string}',
-              'query-input': 'required name=search_term_string',
-            },
-          })}
-        </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'Scambo',
+              url: 'https://www.scambo.shop',
+              description: 'Ranking mensal de fotos com prêmio em dinheiro via Pix.',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://www.scambo.shop/?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
+            }),
+          }}
+        />
         <Header />
         <div className="max-w-4xl mx-auto px-4 py-6">
           {children}
