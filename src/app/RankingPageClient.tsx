@@ -6,6 +6,7 @@ import Countdown from '@/components/Countdown';
 import RankingList from '@/components/RankingList';
 import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { RankingEntry } from '@/types';
+import ShareButtons from '@/components/ShareButtons';
 import { Award, CheckCircle, XCircle, PlusCircle, Trophy } from 'lucide-react';
 
 interface Props {
@@ -80,6 +81,10 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
           <Award className="w-5 h-5" />
           Hall da Fama
         </Link>
+      </div>
+
+      <div className="flex justify-center">
+        <ShareButtons />
       </div>
 
       <RankingList entries={ranking} prize={prize} loading={false} />

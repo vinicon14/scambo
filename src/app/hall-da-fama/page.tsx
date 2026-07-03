@@ -1,10 +1,21 @@
-import { supabase } from '@/lib/supabase';
+import { getServiceSupabase } from '@/lib/supabase';
 import HallOfFameView from '@/components/HallOfFameView';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
+export const metadata: Metadata = {
+  title: 'Hall da Fama',
+  description: 'Veja os vencedores de todos os meses do ranking Scambo. Confira quem ganhou os prêmios em dinheiro!',
+  openGraph: {
+    title: 'Hall da Fama - Scambo',
+    description: 'Veja os vencedores de todos os meses do ranking Scambo.',
+  },
+};
+
 async function getHallOfFame() {
   try {
+    const supabase = getServiceSupabase();
     const { data } = await supabase
       .from('hall_of_fame')
       .select('*')
