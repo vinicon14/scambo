@@ -1,6 +1,16 @@
 import { NextResponse } from 'next/server';
 import { getServiceSupabase } from '@/lib/supabase';
 
+async function getPaymentConfig() {
+  const supabase = getServiceSupabase();
+  const { data } = await supabase
+    .from('payment_config')
+    .select('*')
+    .limit(1)
+    .single();
+  return data;
+}
+
 export async function POST(request: Request) {
   try {
     const { postId } = await request.json();
@@ -20,20 +30,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Postagem não encontrada' }, { status: 404 });
     }
 
-    const { data: config } = await supabase
-      .from('payment_config')
-      .select('*')
-      .limit(1)
-      .single();
-
+    const config = await getPaymentConfig();
     if (!config?.access_token) {
       return NextResponse.json({ error: 'Mercado Pago não configurado' }, { status: 400 });
     }
 
     const origin = request.headers.get('origin') || 'https://www.scambo.shop';
-    const baseUrl = 'https://api.mercadopago.com/checkout/preferences';
 
-    const preferenceRes = await fetch(baseUrl, {
+    const preferenceRes = await fetch('https://api.mercadopago.com/checkout/preferences', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${config.access_token}`,
@@ -60,7 +64,6 @@ export async function POST(request: Request) {
 
     if (!preferenceRes.ok) {
       const errBody = await preferenceRes.text();
-      console.error('MP create preference error:', preferenceRes.status, errBody);
       return NextResponse.json({ error: 'Erro ao criar pagamento no Mercado Pago' }, { status: 502 });
     }
 
@@ -75,8 +78,7 @@ export async function POST(request: Request) {
       initPoint: preference.init_point,
       preferenceId: preference.id,
     });
-  } catch (err) {
-    console.error('Create payment error:', err);
+  } catch {
     return NextResponse.json({ error: 'Erro interno do servidor' }, { status: 500 });
   }
 }
