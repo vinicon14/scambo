@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getServiceSupabase } from '@/lib/supabase';
 
 export async function POST(request: Request) {
   try {
@@ -11,8 +11,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'ID do pagamento não fornecido' }, { status: 400 });
     }
 
+    const supabaseAdmin = getServiceSupabase();
+
     // Get payment config
-    const { data: config } = await supabase
+    const { data: config } = await supabaseAdmin
       .from('payment_config')
       .select('*')
       .limit(1)
@@ -50,7 +52,7 @@ export async function POST(request: Request) {
     }
 
     // Find post by external reference (payment_id)
-    const { data: post } = await supabase
+    const { data: post } = await supabaseAdmin
       .from('posts')
       .select('id, amount, payment_status')
       .eq('payment_id', externalReference)
@@ -67,7 +69,7 @@ export async function POST(request: Request) {
     }
 
     // Update post status to approved
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabaseAdmin
       .from('posts')
       .update({ payment_status: 'approved' })
       .eq('id', post.id);

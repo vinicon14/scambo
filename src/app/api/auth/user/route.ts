@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { getServiceSupabase } from '@/lib/supabase';
 import bcrypt from 'bcryptjs';
 
 export async function POST(request: Request) {
@@ -10,7 +10,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Usuário e senha são obrigatórios' }, { status: 400 });
     }
 
-    const { data: user, error } = await supabase
+    const supabaseAdmin = getServiceSupabase();
+    const { data: user, error } = await supabaseAdmin
       .from('users')
       .select('*')
       .eq('username', username)
