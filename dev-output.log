@@ -1,0 +1,164 @@
+
+> scambo@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://100.75.57.8:3000
+- Environments: .env.local
+✓ Ready in 550ms
+
+-----
+[1m[31mFATAL[39m[0m: An unexpected Turbopack error occurred. A panic log has been written to C:\Users\vinim\AppData\Local\Temp\next-panic-c3d842688cef5e79ba148c05765f6b95.log.
+
+To help make Turbopack better, report this error by clicking here: https://bugs.nextjs.org/search?category=turbopack-error-report&title=Turbopack%20Error%3A%20reading%20file%20%22C%3A%5C%5CUsers%5C%5Cvinim%5C%5COneDrive%5C%5Cscambo%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cshared%5C%5Clib%5C%5Crouter%5C%5Cutils%5C%5Cis-dynamic.js%22&body=Turbopack%20version%3A%20%60v16.2.10%60%0ANext.js%20version%3A%20%600.0.0%60%0A%0AError%20message%3A%0A%60%60%60%0Areading%20file%20%22C%3A%5C%5CUsers%5C%5Cvinim%5C%5COneDrive%5C%5Cscambo%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cshared%5C%5Clib%5C%5Crouter%5C%5Cutils%5C%5Cis-dynamic.js%22%0A%0ACaused%20by%3A%0A-%20O%20arquivo%20j%C3%A1%20est%C3%A1%20sendo%20usado%20por%20outro%20processo.%20%28os%20error%2032%29%0A%0ADebug%20info%3A%0A-%20Execution%20of%20hmr_update_with_issues_operation%20failed%0A-%20Execution%20of%20PlainIssue%3A%3Afrom_issue%20failed%0A-%20Execution%20of%20PlainSource%3A%3Afrom_source%20failed%0A-%20Execution%20of%20%3CFileSource%20as%20Asset%3E%3A%3Acontent%20failed%0A-%20Execution%20of%20%3CDiskFileSystem%20as%20FileSystem%3E%3A%3Aread%20failed%0A-%20reading%20file%20%22C%3A%5C%5CUsers%5C%5Cvinim%5C%5COneDrive%5C%5Cscambo%5C%5Cnode_modules%5C%5Cnext%5C%5Cdist%5C%5Cshared%5C%5Clib%5C%5Crouter%5C%5Cutils%5C%5Cis-dynamic.js%22%0A-%20O%20arquivo%20j%C3%A1%20est%C3%A1%20sendo%20usado%20por%20outro%20processo.%20%28os%20error%2032%29%0A%60%60%60&labels=Turbopack,Turbopack%20Panic%20Backtrace
+-----
+
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+[Server HMR] Subscription error: Error [TurbopackInternalError]: reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+
+Caused by:
+- O arquivo já está sendo usado por outro processo. (os error 32)
+
+Debug info:
+- Execution of hmr_update_with_issues_operation failed
+- Execution of PlainIssue::from_issue failed
+- Execution of PlainSource::from_source failed
+- Execution of <FileSource as Asset>::content failed
+- Execution of <DiskFileSystem as FileSystem>::read failed
+- reading file "C:\\Users\\vinim\\OneDrive\\scambo\\node_modules\\next\\dist\\shared\\lib\\router\\utils\\is-dynamic.js"
+- O arquivo já está sendo usado por outro processo. (os error 32)
+    at ignore-listed frames {
+  location: undefined
+}
+
+ GET / 200 in 10.0s (next.js: 221ms, application-code: 9.7s)
+
+C:\Users\vinim\OneDrive\scambo>
