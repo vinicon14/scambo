@@ -57,7 +57,7 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
                 {index < 3 ? (
                   positionIcons[index]
                 ) : (
-                  <span className="text-lg font-bold text-gray-400">#{entry.position}</span>
+                  <span className="text-lg font-bold text-gray-400">#{entry.pos}</span>
                 )}
               </div>
 

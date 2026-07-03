@@ -1,33 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Trophy, LogIn, PlusCircle, Award, Shield } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { Trophy, PlusCircle, Award, Shield } from 'lucide-react';
 
 export default function Header() {
   const pathname = usePathname();
-  const router = useRouter();
-  const [loggedUser, setLoggedUser] = useState<string | null>(null);
-
-  useEffect(() => {
-    const stored = localStorage.getItem('scambo_user');
-    if (stored) {
-      try {
-        const u = JSON.parse(stored);
-        setLoggedUser(u.username);
-      } catch {
-        setLoggedUser(null);
-      }
-    }
-  }, [pathname]);
-
-  const handleLogout = () => {
-    localStorage.removeItem('scambo_user');
-    setLoggedUser(null);
-    router.push('/');
-    router.refresh();
-  };
 
   if (pathname.startsWith('/admin')) {
     return (
@@ -59,21 +37,10 @@ export default function Header() {
             <Award className="w-4 h-4" />
             Hall da Fama
           </Link>
-          {loggedUser ? (
-            <>
-              <Link href="/criar-postagem" className="flex items-center gap-1 bg-yellow-500 text-gray-900 px-3 py-1.5 rounded-lg font-semibold hover:bg-yellow-400 transition">
-                <PlusCircle className="w-4 h-4" />
-                Postar
-              </Link>
-              <span className="text-purple-200 text-xs">{loggedUser}</span>
-              <button onClick={handleLogout} className="text-purple-200 hover:text-white text-xs">Sair</button>
-            </>
-          ) : (
-            <Link href="/login" className="flex items-center gap-1 bg-white/10 px-3 py-1.5 rounded-lg hover:bg-white/20 transition">
-              <LogIn className="w-4 h-4" />
-              Entrar
-            </Link>
-          )}
+          <Link href="/criar-postagem" className="flex items-center gap-1 bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-400 transition shadow-lg">
+            <PlusCircle className="w-5 h-5" />
+            Criar Postagem
+          </Link>
         </nav>
       </div>
     </header>

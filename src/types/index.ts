@@ -22,7 +22,7 @@ export interface Post {
 }
 
 export interface RankingEntry {
-  position: number;
+  pos: number;
   post_id: string;
   image_url: string;
   username: string;

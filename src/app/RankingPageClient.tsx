@@ -6,7 +6,7 @@ import Countdown from '@/components/Countdown';
 import RankingList from '@/components/RankingList';
 import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { RankingEntry } from '@/types';
-import { Award, Trophy } from 'lucide-react';
+import { Award, PlusCircle, Trophy } from 'lucide-react';
 
 interface Props {
   ranking: RankingEntry[];
@@ -30,13 +30,20 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
 
       {endsAt && <Countdown endsAt={endsAt} />}
 
-      <div className="flex justify-center">
+      <div className="flex flex-col sm:flex-row justify-center gap-3">
+        <Link
+          href="/criar-postagem"
+          className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition shadow-lg"
+        >
+          <PlusCircle className="w-5 h-5" />
+          Criar Postagem
+        </Link>
         <Link
           href="/hall-da-fama"
-          className="flex items-center gap-2 bg-white border border-purple-200 text-purple-700 px-5 py-3 rounded-xl font-semibold hover:bg-purple-50 transition shadow-sm"
+          className="flex items-center justify-center gap-2 bg-white border border-purple-200 text-purple-700 px-5 py-3 rounded-xl font-semibold hover:bg-purple-50 transition shadow-sm"
         >
           <Award className="w-5 h-5" />
-          Ver Hall da Fama
+          Hall da Fama
         </Link>
       </div>
 
