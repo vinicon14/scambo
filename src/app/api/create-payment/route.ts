@@ -31,9 +31,7 @@ export async function POST(request: Request) {
     }
 
     const origin = request.headers.get('origin') || 'https://www.scambo.shop';
-    const baseUrl = config.sandbox
-      ? 'https://api.mercadopago.com/sandbox/v1/preferences'
-      : 'https://api.mercadopago.com/v1/preferences';
+    const baseUrl = 'https://api.mercadopago.com/checkout/preferences';
 
     const preferenceRes = await fetch(baseUrl, {
       method: 'POST',
