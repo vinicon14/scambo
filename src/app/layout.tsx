@@ -8,6 +8,22 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Scambo - Ranking Mensal',
   description: 'Participe do ranking mensal e concorra a prêmios!',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
+  openGraph: {
+    title: 'Scambo - Ranking Mensal',
+    description: 'Participe do ranking mensal e concorra a prêmios!',
+    siteName: 'Scambo',
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Scambo - Ranking Mensal',
+    description: 'Participe do ranking mensal e concorra a prêmios!',
+  },
 };
 
 export default function RootLayout({
