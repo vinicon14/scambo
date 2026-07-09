@@ -1,6 +1,7 @@
 import { getServiceSupabase } from '@/lib/supabase';
 import { getCurrentMonth } from '@/lib/utils';
-import RankingPageClient from './RankingPageClient';
+import { getTranslations } from 'next-intl/server';
+import RankingPageClient from '../RankingPageClient';
 import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
@@ -59,20 +60,26 @@ async function getRankingData() {
   return rankingPromise;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seo' });
   const { ranking } = await getRankingData();
   const firstImage = ranking?.[0]?.image_url;
 
   return {
     openGraph: {
-      title: 'Scambo - Ranking Mensal',
-      description: firstImage ? 'Confira o ranking do mês!' : 'Participe do ranking mensal e concorra a prêmios!',
+      title: t('ogTitle'),
+      description: firstImage ? 'Confira o ranking do mês!' : t('ogDescription'),
       images: firstImage ? [{ url: firstImage, width: 800, height: 800 }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Scambo - Ranking Mensal',
-      description: firstImage ? 'Confira o ranking do mês!' : 'Participe do ranking mensal e concorra a prêmios!',
+      title: t('defaultTitle'),
+      description: firstImage ? 'Confira o ranking do mês!' : t('twitterDescription'),
       images: firstImage ? [firstImage] : undefined,
     },
   };
