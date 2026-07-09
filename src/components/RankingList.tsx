@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { formatCurrency } from '@/lib/utils';
 import { Medal, Trophy, Award, Crown, TrendingUp } from 'lucide-react';
 import { RankingEntry } from '@/types';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface RankingListProps {
   entries: RankingEntry[];
@@ -13,6 +13,7 @@ interface RankingListProps {
 }
 
 export default function RankingList({ entries, prize, loading }: RankingListProps) {
+  const locale = useLocale();
   const t = useTranslations('rankingList');
 
   if (loading) {
@@ -50,7 +51,7 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
                 <p className="text-amber-700 text-xs uppercase tracking-widest font-semibold">{t('estimatedPrize')}</p>
               </div>
               <p className="text-4xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
-                {formatCurrency(prize)}
+                {formatCurrency(prize, locale)}
               </p>
               <p className="text-amber-500 text-xs mt-1 font-medium">{t('firstPlace')}</p>
             </div>
@@ -92,7 +93,7 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-lg sm:text-xl font-bold text-yellow-900 truncate">{entry.username}</p>
-                      <p className="text-2xl sm:text-3xl font-black text-yellow-700 mt-1">{formatCurrency(entry.amount)}</p>
+                      <p className="text-2xl sm:text-3xl font-black text-yellow-700 mt-1">{formatCurrency(entry.amount, locale)}</p>
                     </div>
                   </div>
                 </div>
@@ -141,7 +142,7 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
                       isThird ? 'text-amber-700 text-sm' :
                       'text-gray-500 text-sm'
                     }`}>
-                      {formatCurrency(entry.amount)}
+                      {formatCurrency(entry.amount, locale)}
                     </p>
                   </div>
                 </div>
@@ -163,7 +164,7 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
             </p>
             <p className="text-gray-400 mt-1">
               {t('prizeExample')}{' '}
-              <strong className="text-purple-600">{formatCurrency(300)}</strong>.
+              <strong className="text-purple-600">{formatCurrency(300, locale)}</strong>.
             </p>
           </div>
         </div>

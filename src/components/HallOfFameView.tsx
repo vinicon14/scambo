@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { HallOfFameEntry } from '@/types';
 import { Trophy, Crown, Medal } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface HallOfFameViewProps {
   entries: HallOfFameEntry[];
@@ -18,6 +18,7 @@ const rankIcons = [
 ];
 
 export default function HallOfFameView({ entries, loading }: HallOfFameViewProps) {
+  const locale = useLocale();
   const t = useTranslations('hallOfFame');
 
   if (loading) {
@@ -66,18 +67,18 @@ export default function HallOfFameView({ entries, loading }: HallOfFameViewProps
                 <p className="font-bold text-lg text-gray-800">{entry.username}</p>
               </div>
               <p className="text-sm text-purple-600 font-medium capitalize">
-                {formatMonthYear(entry.month)}
+                {formatMonthYear(entry.month, locale)}
               </p>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4">
             <div>
               <p className="text-xs text-gray-500 uppercase tracking-wide">{t('postedValue')}</p>
-              <p className="text-lg font-bold text-gray-800">{formatCurrency(entry.posted_amount)}</p>
+              <p className="text-lg font-bold text-gray-800">{formatCurrency(entry.posted_amount, locale)}</p>
             </div>
             <div>
               <p className="text-xs text-gray-500 uppercase tracking-wide">{t('prizeReceived')}</p>
-              <p className="text-lg font-bold text-green-600">{formatCurrency(entry.prize_amount)}</p>
+              <p className="text-lg font-bold text-green-600">{formatCurrency(entry.prize_amount, locale)}</p>
             </div>
           </div>
         </div>

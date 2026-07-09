@@ -8,7 +8,7 @@ import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { RankingEntry } from '@/types';
 import ShareButtons from '@/components/ShareButtons';
 import { Award, CheckCircle, XCircle, PlusCircle, Trophy, ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Props {
   ranking: RankingEntry[];
@@ -18,6 +18,7 @@ interface Props {
 }
 
 export default function RankingPageClient({ ranking: initialRanking, prize: initialPrize, endsAt, month }: Props) {
+  const locale = useLocale();
   const t = useTranslations('home');
   const [ranking] = useState(initialRanking);
   const [prize] = useState(initialPrize);
@@ -62,7 +63,7 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
       <div className="text-center">
         <h1 className="text-3xl font-black text-gray-800 flex items-center justify-center gap-2">
           <Trophy className="w-8 h-8 text-yellow-500" />
-          Ranking {formatMonthYear(month)}
+          Ranking {formatMonthYear(month, locale)}
         </h1>
       </div>
 
@@ -96,7 +97,7 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
           <p className="font-semibold text-gray-700 mb-1">{t('prizeSection')}</p>
           <p>
             {t('prizeDescription')}{' '}{t('prizeExample')}{' '}
-            <strong className="text-purple-700">{formatCurrency(300)}</strong>.
+            <strong className="text-purple-700">{formatCurrency(300, locale)}</strong>.
           </p>
         </div>
       )}

@@ -1,3 +1,30 @@
+const localeMap: Record<string, string> = {
+  pt: 'pt-BR',
+  es: 'es-ES',
+  en: 'en-US',
+  fr: 'fr-FR',
+  de: 'de-DE',
+  it: 'it-IT',
+  nl: 'nl-NL',
+  pl: 'pl-PL',
+  sv: 'sv-SE',
+  da: 'da-DK',
+  fi: 'fi-FI',
+  no: 'nb-NO',
+  ja: 'ja-JP',
+  ko: 'ko-KR',
+  zh: 'zh-CN',
+  ru: 'ru-RU',
+  ar: 'ar-SA',
+  hi: 'hi-IN',
+  tr: 'tr-TR',
+  ro: 'ro-RO',
+};
+
+function toLocaleTag(locale?: string): string {
+  return (locale && localeMap[locale]) || 'pt-BR';
+}
+
 export function getCurrentMonth(): string {
   const now = new Date();
   const year = now.getFullYear();
@@ -5,25 +32,25 @@ export function getCurrentMonth(): string {
   return `${year}-${month}`;
 }
 
-export function formatCurrency(value: number): string {
-  return value.toLocaleString('pt-BR', {
+export function formatCurrency(value: number, locale?: string): string {
+  return value.toLocaleString(toLocaleTag(locale), {
     style: 'currency',
     currency: 'BRL',
   });
 }
 
-export function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('pt-BR', {
+export function formatDate(dateString: string, locale?: string): string {
+  return new Date(dateString).toLocaleDateString(toLocaleTag(locale), {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
   });
 }
 
-export function formatMonthYear(month: string): string {
+export function formatMonthYear(month: string, locale?: string): string {
   const [year, m] = month.split('-');
   const date = new Date(parseInt(year), parseInt(m) - 1);
-  return date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+  return date.toLocaleDateString(toLocaleTag(locale), { month: 'long', year: 'numeric' });
 }
 
 export function getMonthName(month: string): string {
