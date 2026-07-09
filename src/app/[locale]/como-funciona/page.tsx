@@ -120,6 +120,24 @@ export default async function ComoFuncionaPage({ params }: Props) {
           {t('ctaLink')}
         </p>
       </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: 'Como participar do Scambo',
+            description: 'Participe do concurso de fotos mensal e concorra a prêmios em dinheiro.',
+            step: [
+              { '@type': 'HowToStep', name: 'Envie sua foto', text: 'Faça upload da sua foto no site.' },
+              { '@type': 'HowToStep', name: 'Pague via Pix', text: 'Escolha o valor e pague via Pix ou cartão.' },
+              { '@type': 'HowToStep', name: 'Apareça no ranking', text: 'Sua foto aparece no ranking após pagamento aprovado.' },
+              { '@type': 'HowToStep', name: 'Concorra ao prêmio', text: 'O primeiro colocado ganha o prêmio no fim do mês.' },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }

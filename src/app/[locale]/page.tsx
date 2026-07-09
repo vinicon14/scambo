@@ -73,13 +73,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     openGraph: {
       title: t('ogTitle'),
-      description: firstImage ? 'Confira o ranking do mês!' : t('ogDescription'),
+      description: firstImage ? t('rankingOgDescription') : t('ogDescription'),
       images: firstImage ? [{ url: firstImage, width: 800, height: 800 }] : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title: t('defaultTitle'),
-      description: firstImage ? 'Confira o ranking do mês!' : t('twitterDescription'),
+      description: firstImage ? t('rankingOgDescription') : t('twitterDescription'),
       images: firstImage ? [firstImage] : undefined,
     },
   };

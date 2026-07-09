@@ -409,6 +409,7 @@
     "contestOgTitle": "Concurso de Fotos com Prêmio em Dinheiro | Scambo",
     "contestOgDescription": "Participe do concurso de fotos mensal e concorra a prêmios em dinheiro. Envio simples, pagamento via Pix, ranking ao vivo!",
     "createPostTitle": "Nova Postagem",
-    "createPostDescription": "Crie sua postagem no ranking Scambo. Envie sua foto, escolha o valor e concorra a prêmios em dinheiro via Pix."
+    "createPostDescription": "Crie sua postagem no ranking Scambo. Envie sua foto, escolha o valor e concorra a prêmios em dinheiro via Pix.",
+    "rankingOgDescription": "Confira o ranking do mês!"
   }
 }
