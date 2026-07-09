@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Omit<Props, 'children'>) {
     authors: [{ name: 'Scambo' }],
     creator: 'Scambo',
     publisher: 'Scambo',
-    metadataBase: new URL('https://www.scambo.shop'),
+    metadataBase: new URL('https://scambo.shop'),
     alternates: {
       canonical: '/',
       languages: Object.fromEntries(
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Omit<Props, 'children'>) {
       siteName: 'Scambo',
       locale: 'pt_BR',
       type: 'website',
-      url: 'https://www.scambo.shop',
+      url: 'https://scambo.shop',
       countryName: 'Brasil',
       emails: ['contato@scambo.shop'],
     },
@@ -125,11 +125,11 @@ export default async function LocaleLayout({ children, params }: Props) {
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Scambo',
-              url: 'https://www.scambo.shop',
+url: 'https://scambo.shop',
               description: 'Ranking mensal de fotos com prêmio em dinheiro via Pix.',
               potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://www.scambo.shop/?q={search_term_string}',
+                target: 'https://scambo.shop/?q={search_term_string}',
                 'query-input': 'required name=search_term_string',
               },
             }),

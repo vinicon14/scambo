@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Mercado Pago não configurado' }, { status: 400 });
     }
 
-    const origin = request.headers.get('origin') || 'https://www.scambo.shop';
+    const origin = request.headers.get('origin') || 'https://scambo.shop';
 
     const preferenceRes = await fetch('https://api.mercadopago.com/checkout/preferences', {
       method: 'POST',

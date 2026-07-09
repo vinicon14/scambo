@@ -44,7 +44,7 @@ export async function POST(request: Request) {
         payment_method_id: 'pix',
         payer: { email: 'pagamento@scambo.shop' },
         external_reference: post.id,
-        notification_url: 'https://www.scambo.shop/api/webhook/mercadopago',
+        notification_url: 'https://scambo.shop/api/webhook/mercadopago',
       }),
     });
 

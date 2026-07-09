@@ -8,7 +8,7 @@ export default function ShareButtons() {
   const t = useTranslations('shareButtons');
   const [copied, setCopied] = useState(false);
 
-  const url = typeof window !== 'undefined' ? window.location.href : 'https://www.scambo.shop';
+  const url = typeof window !== 'undefined' ? window.location.href : 'https://scambo.shop';
   const text = t('shareText');
 
   const shareWhatsApp = () => {

@@ -2,7 +2,7 @@ import { routing } from '@/i18n/routing';
 import { getServiceSupabase } from '@/lib/supabase';
 import { getCurrentMonth } from '@/lib/utils';
 
-const BASE_URL = 'https://www.scambo.shop';
+const BASE_URL = 'https://scambo.shop';
 
 type PathnamesConfig = Record<string, string | Record<string, string>>;
 
