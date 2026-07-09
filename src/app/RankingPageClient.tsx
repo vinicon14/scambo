@@ -8,6 +8,7 @@ import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { RankingEntry } from '@/types';
 import ShareButtons from '@/components/ShareButtons';
 import { Award, CheckCircle, XCircle, PlusCircle, Trophy, ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   ranking: RankingEntry[];
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export default function RankingPageClient({ ranking: initialRanking, prize: initialPrize, endsAt, month }: Props) {
+  const t = useTranslations('home');
   const [ranking] = useState(initialRanking);
   const [prize] = useState(initialPrize);
   const [paymentMessage, setPaymentMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -30,11 +32,11 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
   useEffect(() => {
     const status = getPaymentStatus();
     if (status === 'success') {
-      setPaymentMessage({ type: 'success', text: 'Pagamento aprovado! Sua foto aparecerá no ranking em instantes.' });
+      setPaymentMessage({ type: 'success', text: t('paymentApproved') });
     } else if (status === 'failure') {
-      setPaymentMessage({ type: 'error', text: 'Pagamento não foi concluído. Tente novamente.' });
+      setPaymentMessage({ type: 'error', text: t('paymentError') });
     } else if (status === 'pending') {
-      setPaymentMessage({ type: 'error', text: 'Pagamento está pendente. Assim que for aprovado, sua foto aparecerá no ranking.' });
+      setPaymentMessage({ type: 'error', text: t('paymentPending') });
     }
     if (status) {
       window.history.replaceState({}, '', '/');
@@ -72,14 +74,14 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
           className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition shadow-lg"
         >
           <PlusCircle className="w-5 h-5" />
-          Criar Postagem
+          {t('createPost')}
         </Link>
         <Link
           href="/hall-da-fama"
           className="flex items-center justify-center gap-2 bg-white border border-purple-200 text-purple-700 px-5 py-3 rounded-xl font-semibold hover:bg-purple-50 transition shadow-sm"
         >
           <Award className="w-5 h-5" />
-          Hall da Fama
+          {t('hallOfFame')}
         </Link>
       </div>
 
@@ -91,23 +93,22 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
 
       {ranking.length > 0 && (
         <div className="bg-white border border-gray-100 rounded-2xl p-5 text-sm text-gray-500 shadow-sm">
-          <p className="font-semibold text-gray-700 mb-1">Como funciona o prêmio?</p>
+          <p className="font-semibold text-gray-700 mb-1">{t('prizeSection')}</p>
           <p>
-            O primeiro lugar recebe o valor que pagou + 50% da soma de todas as outras postagens.
-            Exemplo: você posta R$100 e as outras postagens somam R$400. Seu prêmio = R$100 + R$200 ={' '}
+            {t('prizeDescription')}{' '}{t('prizeExample')}{' '}
             <strong className="text-purple-700">{formatCurrency(300)}</strong>.
           </p>
         </div>
       )}
 
       <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm space-y-4">
-        <h2 className="text-lg font-bold text-gray-800">Dúvidas frequentes</h2>
+        <h2 className="text-lg font-bold text-gray-800">{t('faqMini.heading')}</h2>
         <div className="space-y-2 text-sm">
           {[
-            { q: 'O que é o Scambo?', a: 'É um concurso de fotos online. Você envia sua foto, paga um valor via Pix e concorre a prêmios em dinheiro todo mês.' },
-            { q: 'Quanto custa?', a: 'A partir de R$ 5. Você escolhe o valor.' },
-            { q: 'Como recebo se ganhar?', a: 'O prêmio é transferido via Pix para a chave que você cadastrou.' },
-            { q: 'Preciso ser influencer?', a: 'Não! Qualquer pessoa pode participar.' },
+            { q: t('faqMini.q1'), a: t('faqMini.a1') },
+            { q: t('faqMini.q2'), a: t('faqMini.a2') },
+            { q: t('faqMini.q3'), a: t('faqMini.a3') },
+            { q: t('faqMini.q4'), a: t('faqMini.a4') },
           ].map((item) => (
             <details key={item.q} className="group">
               <summary className="cursor-pointer font-medium text-gray-700 hover:text-purple-700 transition-colors list-none flex items-center justify-between gap-2 py-1">
@@ -119,7 +120,7 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
           ))}
         </div>
         <p className="text-xs text-gray-400 text-center pt-1">
-          Veja <Link href="/faq" className="text-purple-600 hover:underline">todas as perguntas</Link> · <Link href="/como-funciona" className="text-purple-600 hover:underline">como funciona</Link>
+          Veja <Link href="/faq" className="text-purple-600 hover:underline">{t('faqMini.allQuestions')}</Link> · <Link href="/como-funciona" className="text-purple-600 hover:underline">{t('faqMini.howItWorks')}</Link>
         </p>
       </div>
 
@@ -130,10 +131,10 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'O que é o Scambo?', acceptedAnswer: { '@type': 'Answer', text: 'É um concurso de fotos online. Você envia sua foto, paga um valor via Pix e concorre a prêmios em dinheiro todo mês.' } },
-              { '@type': 'Question', name: 'Quanto custa para participar?', acceptedAnswer: { '@type': 'Answer', text: 'A partir de R$ 5. Você escolhe o valor que deseja pagar.' } },
-              { '@type': 'Question', name: 'Como recebo o prêmio se ganhar?', acceptedAnswer: { '@type': 'Answer', text: 'O prêmio é transferido via Pix para a chave que você cadastrou ao criar sua postagem.' } },
-              { '@type': 'Question', name: 'Preciso ser influencer para participar?', acceptedAnswer: { '@type': 'Answer', text: 'Não! Qualquer pessoa pode participar, não precisa de seguidores ou habilidades especiais.' } },
+              { '@type': 'Question', name: t('faqMini.q1'), acceptedAnswer: { '@type': 'Answer', text: t('faqMini.a1') } },
+              { '@type': 'Question', name: t('faqMini.q2'), acceptedAnswer: { '@type': 'Answer', text: t('faqMini.a2') } },
+              { '@type': 'Question', name: t('faqMini.q3'), acceptedAnswer: { '@type': 'Answer', text: t('faqMini.a3') } },
+              { '@type': 'Question', name: t('faqMini.q4'), acceptedAnswer: { '@type': 'Answer', text: t('faqMini.a4') } },
             ],
           }),
         }}

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { formatCurrency } from '@/lib/utils';
 import { Medal, Trophy, Award, Crown, TrendingUp } from 'lucide-react';
 import { RankingEntry } from '@/types';
+import { useTranslations } from 'next-intl';
 
 interface RankingListProps {
   entries: RankingEntry[];
@@ -12,13 +13,15 @@ interface RankingListProps {
 }
 
 export default function RankingList({ entries, prize, loading }: RankingListProps) {
+  const t = useTranslations('rankingList');
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
         <div className="relative">
           <div className="w-14 h-14 border-4 border-purple-200 border-t-purple-700 rounded-full animate-spin" />
         </div>
-        <p className="text-gray-400 font-medium">Carregando ranking...</p>
+        <p className="text-gray-400 font-medium">{t('loading')}</p>
       </div>
     );
   }
@@ -29,8 +32,8 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
         <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-purple-100 to-indigo-100 flex items-center justify-center">
           <Trophy className="w-10 h-10 text-purple-300" />
         </div>
-        <p className="text-2xl font-bold text-gray-300">Nenhuma postagem ainda</p>
-        <p className="text-gray-400 mt-2">Seja o primeiro a participar!</p>
+        <p className="text-2xl font-bold text-gray-300">{t('emptyHeading')}</p>
+        <p className="text-gray-400 mt-2">{t('emptyDescription')}</p>
       </div>
     );
   }
@@ -44,12 +47,12 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2 mb-1">
                 <TrendingUp className="w-4 h-4 text-amber-500" />
-                <p className="text-amber-700 text-xs uppercase tracking-widest font-semibold">Prêmio Estimado</p>
+                <p className="text-amber-700 text-xs uppercase tracking-widest font-semibold">{t('estimatedPrize')}</p>
               </div>
               <p className="text-4xl font-black bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
                 {formatCurrency(prize)}
               </p>
-              <p className="text-amber-500 text-xs mt-1 font-medium">1º Lugar</p>
+              <p className="text-amber-500 text-xs mt-1 font-medium">{t('firstPlace')}</p>
             </div>
           </div>
         </div>
@@ -153,13 +156,13 @@ export default function RankingList({ entries, prize, loading }: RankingListProp
           <div className="bg-gradient-to-br from-gray-50 to-slate-50 border border-gray-100 rounded-2xl p-5 text-sm text-gray-500">
             <p className="font-semibold text-gray-700 mb-2 flex items-center gap-2">
               <Trophy className="w-4 h-4 text-yellow-500" />
-              Como funciona o prêmio?
+              {t('prizeSection')}
             </p>
             <p className="leading-relaxed">
-              O primeiro lugar recebe o valor que pagou + 50% da soma de todas as outras postagens.
+              {t('prizeDescription')}
             </p>
             <p className="text-gray-400 mt-1">
-              Exemplo: você posta R$100 e as outras postagens somam R$400. Seu prêmio = R$100 + R$200 ={' '}
+              {t('prizeExample')}{' '}
               <strong className="text-purple-600">{formatCurrency(300)}</strong>.
             </p>
           </div>

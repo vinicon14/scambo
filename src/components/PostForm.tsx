@@ -4,12 +4,14 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { Camera, Upload, AlertCircle, CheckCircle, Loader2 } from 'lucide-react';
 import { validateImageFile } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface PostFormProps {
   onLoginSuccess?: (id: string, name: string) => void;
 }
 
 export default function PostForm({ onLoginSuccess }: PostFormProps) {
+  const t = useTranslations('postForm');
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [phone, setPhone] = useState('');
@@ -47,22 +49,22 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
     setSuccess('');
 
     if (!file) {
-      setError('Selecione uma foto para postar.');
+      setError(t('errorNoPhoto'));
       return;
     }
 
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      setError('Informe um valor válido maior que zero.');
+      setError(t('errorInvalidAmount'));
       return;
     }
     if (amountNum > 100000) {
-      setError('Valor máximo permitido: R$ 100.000,00');
+      setError(t('errorMaxAmount'));
       return;
     }
 
     if (!newUsername.trim()) {
-      setError('Informe um nome de usuário.');
+      setError(t('errorNoUsername'));
       return;
     }
 
@@ -81,7 +83,7 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
 
       if (!uploadRes.ok) {
         const uploadData = await uploadRes.json();
-        throw new Error(uploadData.error || 'Erro ao fazer upload da imagem');
+        throw new Error(uploadData.error || t('errorUpload'));
       }
 
       const { url: imageUrl } = await uploadRes.json();
@@ -102,7 +104,7 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
 
       if (!postRes.ok) {
         const postData = await postRes.json();
-        throw new Error(postData.error || 'Erro ao criar postagem');
+        throw new Error(postData.error || t('errorCreate'));
       }
 
       const postResult = await postRes.json();
@@ -114,13 +116,13 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
         onLoginSuccess(savedId, newUsername);
       }
 
-      setSuccess('Redirecionando para pagamento...');
+      setSuccess(t('redirecting'));
 
       setTimeout(() => {
         router.push(`/pagar/${postResult.post.id}`);
       }, 1000);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Erro ao criar postagem');
+      setError(err instanceof Error ? err.message : t('errorCreate'));
     } finally {
       setLoading(false);
     }
@@ -142,12 +144,12 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
       )}
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Nome de Usuário (público)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('username')}</label>
         <input
           type="text"
           value={newUsername}
           onChange={(e) => setNewUsername(e.target.value)}
-          placeholder="Seu nome no ranking"
+          placeholder={t('usernamePlaceholder')}
           required
           minLength={3}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
@@ -155,24 +157,24 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Telefone (privado)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('phone')}</label>
         <input
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          placeholder="(11) 99999-9999"
+          placeholder={t('phonePlaceholder')}
           required
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('password')}</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Crie uma senha para sua conta"
+          placeholder={t('passwordPlaceholder')}
           required
           minLength={6}
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
@@ -180,24 +182,24 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Chave Pix (para receber prêmio)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('pixKey')}</label>
         <input
           type="text"
           value={pixKey}
           onChange={(e) => setPixKey(e.target.value)}
-          placeholder="CPF, email, telefone ou chave aleatória"
+          placeholder={t('pixKeyPlaceholder')}
           required
           className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Valor da Postagem (R$)</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('amount')}</label>
         <input
           type="number"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          placeholder="100.00"
+          placeholder={t('amountPlaceholder')}
           min="1"
           max="100000"
           step="0.01"
@@ -207,7 +209,7 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Foto</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1">{t('photo')}</label>
         <input
           ref={fileInputRef}
           type="file"
@@ -217,13 +219,13 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
         />
         {preview ? (
           <div className="relative w-32 h-32 rounded-xl overflow-hidden border-2 border-purple-200">
-            <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+            <img src={preview} alt={t('photoPreview')} className="w-full h-full object-cover" />
             <button
               type="button"
               onClick={() => { setFile(null); setPreview(null); fileInputRef.current!.value = ''; }}
               className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
             >
-              X
+              {t('removePhoto')}
             </button>
           </div>
         ) : (
@@ -233,10 +235,10 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
             className="flex items-center gap-2 px-4 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-500 hover:border-purple-400 hover:text-purple-600 transition w-full"
           >
             <Camera className="w-5 h-5" />
-            <span>Selecionar foto</span>
+            <span>{t('selectPhoto')}</span>
           </button>
         )}
-        <p className="text-xs text-gray-400 mt-1">JPEG, PNG, WebP ou GIF. Máximo 5MB.</p>
+        <p className="text-xs text-gray-400 mt-1">{t('photoHelp')}</p>
       </div>
 
       <button
@@ -247,18 +249,18 @@ export default function PostForm({ onLoginSuccess }: PostFormProps) {
         {loading ? (
           <>
             <Loader2 className="w-5 h-5 animate-spin" />
-            Criando postagem...
+            {t('creating')}
           </>
         ) : (
           <>
             <Upload className="w-5 h-5" />
-            Criar Postagem
+            {t('submit')}
           </>
         )}
       </button>
 
       <p className="text-xs text-gray-400 text-center">
-        Seus dados privados (telefone, Pix, senha) ficam protegidos e só aparecem no painel administrativo.
+        {t('privacyNote')}
       </p>
     </form>
   );

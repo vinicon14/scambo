@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import { getRemainingTime } from '@/lib/utils';
 import { Clock, Timer } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface CountdownProps {
   endsAt: string;
 }
 
 export default function Countdown({ endsAt }: CountdownProps) {
+  const t = useTranslations('countdown');
   const [time, setTime] = useState(getRemainingTime(endsAt));
   const [mounted, setMounted] = useState(false);
 
@@ -26,10 +28,10 @@ export default function Countdown({ endsAt }: CountdownProps) {
   if (!mounted) return null;
 
   const items = [
-    { value: time.days, label: 'Dias' },
-    { value: time.hours, label: 'Horas' },
-    { value: time.minutes, label: 'Min' },
-    { value: time.seconds, label: 'Seg' },
+    { value: time.days, label: t('days') },
+    { value: time.hours, label: t('hours') },
+    { value: time.minutes, label: t('minutes') },
+    { value: time.seconds, label: t('seconds') },
   ];
 
   return (
@@ -39,7 +41,7 @@ export default function Countdown({ endsAt }: CountdownProps) {
         <div className="relative z-10">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Timer className="w-5 h-5 text-purple-200" />
-            <h3 className="text-sm font-semibold text-purple-200 uppercase tracking-wider">Ranking encerra em</h3>
+            <h3 className="text-sm font-semibold text-purple-200 uppercase tracking-wider">{t('heading')}</h3>
           </div>
           <div className="flex justify-center gap-3">
             {items.map((item, i) => (
@@ -55,7 +57,7 @@ export default function Countdown({ endsAt }: CountdownProps) {
           </div>
           {time.total === 0 && (
             <p className="mt-4 text-yellow-300 font-semibold animate-fade-in">
-              Ranking encerrado! Aguardando resultado...
+              {t('expired')}
             </p>
           )}
         </div>

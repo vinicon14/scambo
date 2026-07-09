@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { HallOfFameEntry } from '@/types';
 import { Trophy, Crown, Medal } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface HallOfFameViewProps {
   entries: HallOfFameEntry[];
@@ -17,11 +18,13 @@ const rankIcons = [
 ];
 
 export default function HallOfFameView({ entries, loading }: HallOfFameViewProps) {
+  const t = useTranslations('hallOfFame');
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-3">
         <div className="w-14 h-14 border-4 border-purple-200 border-t-purple-700 rounded-full animate-spin" />
-        <p className="text-gray-400 font-medium">Carregando...</p>
+        <p className="text-gray-400 font-medium">{t('loading')}</p>
       </div>
     );
   }
@@ -32,8 +35,8 @@ export default function HallOfFameView({ entries, loading }: HallOfFameViewProps
         <div className="w-20 h-20 mx-auto mb-5 rounded-full bg-gradient-to-br from-amber-100 to-yellow-100 flex items-center justify-center">
           <Trophy className="w-10 h-10 text-amber-300" />
         </div>
-        <p className="text-2xl font-bold text-gray-300">Nenhum vencedor ainda</p>
-        <p className="text-gray-400 mt-2">Participe do ranking mensal!</p>
+        <p className="text-2xl font-bold text-gray-300">{t('noWinner')}</p>
+        <p className="text-gray-400 mt-2">{t('noWinnerDescription')}</p>
       </div>
     );
   }
@@ -69,11 +72,11 @@ export default function HallOfFameView({ entries, loading }: HallOfFameViewProps
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl p-4">
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">Valor Postado</p>
+              <p className="text-xs text-gray-500 uppercase tracking-wide">{t('postedValue')}</p>
               <p className="text-lg font-bold text-gray-800">{formatCurrency(entry.posted_amount)}</p>
             </div>
             <div>
-              <p className="text-xs text-gray-500 uppercase tracking-wide">Prêmio Recebido</p>
+              <p className="text-xs text-gray-500 uppercase tracking-wide">{t('prizeReceived')}</p>
               <p className="text-lg font-bold text-green-600">{formatCurrency(entry.prize_amount)}</p>
             </div>
           </div>
