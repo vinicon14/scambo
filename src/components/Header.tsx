@@ -7,6 +7,8 @@ import { Trophy, PlusCircle, Award, Shield } from 'lucide-react';
 export default function Header() {
   const pathname = usePathname();
 
+  const isSeoPage = pathname === '/como-funciona' || pathname === '/faq' || pathname === '/concurso-de-fotos-premio' || pathname === '/ganhe-dinheiro-com-fotos';
+
   if (pathname.startsWith('/admin')) {
     return (
       <header className="bg-gray-900 text-white p-4 shadow-lg">

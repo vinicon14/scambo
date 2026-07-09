@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Script from 'next/script';
 
@@ -110,9 +111,47 @@ export default function RootLayout({
           }}
         />
         <Header />
-        <div className="max-w-4xl mx-auto px-4 py-6">
+        <div className="max-w-4xl mx-auto px-4 py-6 min-h-[60vh]">
           {children}
         </div>
+        <footer className="bg-gray-100 border-t border-gray-200 mt-12">
+          <div className="max-w-4xl mx-auto px-4 py-8">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+              <div className="space-y-2">
+                <p className="font-bold text-gray-800">Scambo</p>
+                <ul className="space-y-1.5 text-gray-500">
+                  <li><Link href="/" className="hover:text-purple-600 transition">Ranking</Link></li>
+                  <li><Link href="/criar-postagem" className="hover:text-purple-600 transition">Criar Postagem</Link></li>
+                  <li><Link href="/hall-da-fama" className="hover:text-purple-600 transition">Hall da Fama</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <p className="font-bold text-gray-800">Informações</p>
+                <ul className="space-y-1.5 text-gray-500">
+                  <li><Link href="/como-funciona" className="hover:text-purple-600 transition">Como Funciona</Link></li>
+                  <li><Link href="/faq" className="hover:text-purple-600 transition">FAQ</Link></li>
+                  <li><Link href="/concurso-de-fotos-premio" className="hover:text-purple-600 transition">Concurso de Fotos</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <p className="font-bold text-gray-800">Participe</p>
+                <ul className="space-y-1.5 text-gray-500">
+                  <li><Link href="/ganhe-dinheiro-com-fotos" className="hover:text-purple-600 transition">Ganhe Dinheiro</Link></li>
+                  <li><Link href="/criar-postagem" className="hover:text-purple-600 transition">Enviar Foto</Link></li>
+                </ul>
+              </div>
+              <div className="space-y-2">
+                <p className="font-bold text-gray-800">Contato</p>
+                <ul className="space-y-1.5 text-gray-500">
+                  <li>contato@scambo.shop</li>
+                </ul>
+              </div>
+            </div>
+            <div className="border-t border-gray-200 mt-6 pt-4 text-center text-xs text-gray-400">
+              &copy; {new Date().getFullYear()} Scambo. Todos os direitos reservados.
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

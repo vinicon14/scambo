@@ -7,7 +7,7 @@ import RankingList from '@/components/RankingList';
 import { formatCurrency, formatMonthYear } from '@/lib/utils';
 import { RankingEntry } from '@/types';
 import ShareButtons from '@/components/ShareButtons';
-import { Award, CheckCircle, XCircle, PlusCircle, Trophy } from 'lucide-react';
+import { Award, CheckCircle, XCircle, PlusCircle, Trophy, ChevronDown } from 'lucide-react';
 
 interface Props {
   ranking: RankingEntry[];
@@ -99,6 +99,45 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
           </p>
         </div>
       )}
+
+      <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm space-y-4">
+        <h2 className="text-lg font-bold text-gray-800">Dúvidas frequentes</h2>
+        <div className="space-y-2 text-sm">
+          {[
+            { q: 'O que é o Scambo?', a: 'É um concurso de fotos online. Você envia sua foto, paga um valor via Pix e concorre a prêmios em dinheiro todo mês.' },
+            { q: 'Quanto custa?', a: 'A partir de R$ 5. Você escolhe o valor.' },
+            { q: 'Como recebo se ganhar?', a: 'O prêmio é transferido via Pix para a chave que você cadastrou.' },
+            { q: 'Preciso ser influencer?', a: 'Não! Qualquer pessoa pode participar.' },
+          ].map((item) => (
+            <details key={item.q} className="group">
+              <summary className="cursor-pointer font-medium text-gray-700 hover:text-purple-700 transition-colors list-none flex items-center justify-between gap-2 py-1">
+                {item.q}
+                <ChevronDown className="w-4 h-4 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" />
+              </summary>
+              <p className="text-gray-500 pt-1 pb-2 pl-1">{item.a}</p>
+            </details>
+          ))}
+        </div>
+        <p className="text-xs text-gray-400 text-center pt-1">
+          Veja <Link href="/faq" className="text-purple-600 hover:underline">todas as perguntas</Link> · <Link href="/como-funciona" className="text-purple-600 hover:underline">como funciona</Link>
+        </p>
+      </div>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              { '@type': 'Question', name: 'O que é o Scambo?', acceptedAnswer: { '@type': 'Answer', text: 'É um concurso de fotos online. Você envia sua foto, paga um valor via Pix e concorre a prêmios em dinheiro todo mês.' } },
+              { '@type': 'Question', name: 'Quanto custa para participar?', acceptedAnswer: { '@type': 'Answer', text: 'A partir de R$ 5. Você escolhe o valor que deseja pagar.' } },
+              { '@type': 'Question', name: 'Como recebo o prêmio se ganhar?', acceptedAnswer: { '@type': 'Answer', text: 'O prêmio é transferido via Pix para a chave que você cadastrou ao criar sua postagem.' } },
+              { '@type': 'Question', name: 'Preciso ser influencer para participar?', acceptedAnswer: { '@type': 'Answer', text: 'Não! Qualquer pessoa pode participar, não precisa de seguidores ou habilidades especiais.' } },
+            ],
+          }),
+        }}
+      />
     </div>
   );
 }
