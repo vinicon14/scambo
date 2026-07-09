@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Trophy, PlusCircle, Award, Shield, Globe } from 'lucide-react';
+import { Trophy, PlusCircle, Award, Shield } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from './LocaleSwitcher';
 
