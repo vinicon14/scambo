@@ -52,6 +52,11 @@ export default function PagarPage() {
         setQrCodeBase64(data.qrCodeBase64);
         setQrCode(data.qrCode);
         setTicketUrl(data.ticketUrl);
+        if (data.amount) {
+          setAmount(data.amount);
+          sessionStorage.setItem('lastPaymentAmount', String(data.amount));
+          sessionStorage.setItem('lastPaymentPostId', postId);
+        }
         setStep('pix');
 
         // Start polling
@@ -72,6 +77,19 @@ export default function PagarPage() {
     }, 3000);
     return () => clearInterval(interval);
   }, [step, checkStatus]);
+
+  // Fire Google Ads purchase event when payment is approved
+  useEffect(() => {
+    const gt = (window as any).gtag;
+    if (step !== 'approved' || typeof window === 'undefined' || !gt) return;
+    gt('event', 'purchase', {
+      send_to: 'AW-18320384493',
+      value: amount,
+      currency: 'BRL',
+      transaction_id: postId,
+      items: [{ id: postId, name: 'Postagem Ranking Scambo', quantity: 1, price: amount }],
+    });
+  }, [step, amount, postId]);
 
   const handleCopy = async () => {
     try {

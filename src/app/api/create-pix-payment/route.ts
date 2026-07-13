@@ -68,6 +68,7 @@ export async function POST(request: Request) {
       qrCodeBase64: txData?.qr_code_base64 || '',
       ticketUrl: txData?.ticket_url || '',
       status: payment.status,
+      amount: Number(post.amount),
     });
   } catch {
     return NextResponse.json({ error: 'Erro interno do servidor' }, { status: 500 });

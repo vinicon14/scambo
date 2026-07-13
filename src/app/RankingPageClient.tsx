@@ -34,6 +34,20 @@ export default function RankingPageClient({ ranking: initialRanking, prize: init
     const status = getPaymentStatus();
     if (status === 'success') {
       setPaymentMessage({ type: 'success', text: t('paymentApproved') });
+      const gt = (window as any).gtag;
+      const storedAmount = parseFloat(sessionStorage.getItem('lastPaymentAmount') || '0');
+      const storedPostId = sessionStorage.getItem('lastPaymentPostId') || '';
+      sessionStorage.removeItem('lastPaymentAmount');
+      sessionStorage.removeItem('lastPaymentPostId');
+      if (typeof gt === 'function') {
+        gt('event', 'purchase', {
+          send_to: 'AW-18320384493',
+          value: storedAmount,
+          currency: 'BRL',
+          transaction_id: storedPostId,
+          items: [{ id: storedPostId, name: 'Postagem Ranking Scambo', quantity: 1, price: storedAmount }],
+        });
+      }
     } else if (status === 'failure') {
       setPaymentMessage({ type: 'error', text: t('paymentError') });
     } else if (status === 'pending') {
