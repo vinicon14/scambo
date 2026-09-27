@@ -1,0 +1,9 @@
+'use client';
+import {useState} from 'react';
+import {Search,Pencil,Coffee,UtensilsCrossed} from 'lucide-react';
+import {Tabs,TabsList,TabsTrigger} from '@/components/ui/tabs';
+export default function QuestionBank({questions,onEdit}:{questions:any[];onEdit:(q:any)=>void}){
+ const [category,setCategory]=useState('all'),[query,setQuery]=useState('');
+ const list=questions.filter(q=>(category==='all'||q.category===category)&&q.text.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR')));
+ return <section className="section-card question-bank"><h2>Banco de perguntas</h2><p>45 perguntas editáveis. Cada avaliação recebe 3 perguntas sobre o lanche e 2 sobre o café.</p><div className="question-bank-controls"><Tabs value={category} onValueChange={setCategory}><TabsList><TabsTrigger value="all">Todas ({questions.length})</TabsTrigger><TabsTrigger value="dish">Lanche ({questions.filter(q=>q.category==='dish').length})</TabsTrigger><TabsTrigger value="coffee">Café ({questions.filter(q=>q.category==='coffee').length})</TabsTrigger></TabsList></Tabs><div className="searchbox"><Search size={18}/><input aria-label="Buscar pergunta" placeholder="Buscar uma pergunta" value={query} onChange={e=>setQuery(e.target.value)}/></div></div><div className="question-list">{list.map(q=><article className="question-bank-card" key={q.id}><span className={'pill '+(q.category==='coffee'?'gold':'')}>{q.category==='coffee'?<Coffee size={13}/>:<UtensilsCrossed size={13}/>} {q.category==='coffee'?'Café':'Lanche'}</span><p>{q.text}</p><button className="btn small" onClick={()=>onEdit(q)} aria-label={'Editar pergunta '+q.id}><Pencil size={14}/>Editar</button></article>)}</div>{!list.length&&<p className="empty">Nenhuma pergunta corresponde à busca.</p>}<p className="bottom-note">As edições valem para novos questionários. Avaliações e questionários já iniciados mantêm a versão original.</p></section>
+}

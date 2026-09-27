@@ -1,0 +1,23 @@
+{
+  "id": "/",
+  "name": "Bebida de Estrada",
+  "short_name": "Bebida de Estrada",
+  "description": "Encontre paradas e descubra os sabores da estrada.",
+  "lang": "pt-BR",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f8f9f5",
+  "theme_color": "#163f35",
+  "categories": ["food", "travel"],
+  "icons": [
+    {"src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ],
+  "shortcuts": [
+    {"name": "Explorar paradas", "url": "/"},
+    {"name": "Ranking da estrada", "url": "/ranking"},
+    {"name": "Guia de Estrada", "url": "/guia"}
+  ]
+}

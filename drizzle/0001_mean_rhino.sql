@@ -1,0 +1,1 @@
+CREATE INDEX `idx_reviews_business_campaign` ON `reviews` (`businessId`,`campaignId`);
